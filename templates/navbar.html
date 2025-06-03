@@ -1,0 +1,52 @@
+{{ define "navbar" }}
+<!-- Alumni Sans SC Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Apply Alumni Sans SC font to navbar and its contents */
+  nav.navbar {
+    font-family: "Alumni Sans SC", sans-serif;
+  }
+
+  .navbar-nav .nav-item {
+    margin-left: 1rem;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/" style="font-size: 2rem">PollMatic</a>
+
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarContent"
+    >
+      <ul class="navbar-nav" style="font-size: 1.5rem">
+        {{ if .IsLoggedIn }}
+        <li class="nav-item">
+          <a class="nav-link" href="/mypolls">My Polls</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {{ else }}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</nav>
+{{ end }}

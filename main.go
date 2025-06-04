@@ -9,15 +9,9 @@ import (
 	"voterapp/middlewares"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
 	mongoURI := os.Getenv("MONGO_URI")
 	if mongoURI == "" {
 		log.Fatal("MONGO_URI not set in environment")
@@ -59,5 +53,9 @@ func main() {
 	auth.GET("/mypolls", controllers.ShowUserPolls)
 	auth.POST("/poll/:id/delete", controllers.DeletePoll)
 
-	router.Run(":8082")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8082"
+	}
+	router.Run(":" + port)
 }

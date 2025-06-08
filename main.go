@@ -9,12 +9,18 @@ import (
 	"voterapp/middlewares"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	// Load .env file if present
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, continuing with system environment variables")
+	}
+
 	mongoURI := os.Getenv("MONGO_URI")
 	if mongoURI == "" {
-		log.Fatal("MONGO_URI not set in environment")
+		log.Fatal("MONGO_URI not set in environment or .env file")
 	}
 
 	db.Connect(mongoURI)
